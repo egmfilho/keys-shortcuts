@@ -117,34 +117,29 @@
 
             function link(scope, element, attrs) {
 
+                function action(keyCode, callback, preventDefault) {
+                    if (!buffer[keyCode] && callback) {
+                        buffer[keyCode] = true;
+                        scope.$apply(function () {
+                            scope.$eval(callback);
+                        });
+                        
+                        if (scope.preventDefault) {
+                            event.preventDefault();
+                        }
+                    }
+                }
+
                 element.bind('keydown', function (event) {
                     if (event.keyCode in buffer) {
 
                         switch (event.keyCode) {
-                            case keys.F1:
-                                if (!buffer[event.keyCode] && scope.f1) {
-                                    buffer[event.keyCode] = true;
-                                    scope.$apply(function () {
-                                        scope.$eval(scope.f1);
-                                    });
-                                    event.preventDefault();
-                                }
+                            case keys.BACKSPACE:
+                                action(event.keyCode, scope.backspace);
                                 break;
 
-                            case keys.F5:
-                                if (!buffer[event.keyCode] && scope.f2) {
-                                    buffer[event.keyCode] = true;
-                                    scope.$apply(function () {
-                                        scope.$eval(scope.f5);
-                                    });
-                                    event.preventDefault();
-                                }
-                                break;
-
-                            case keys.SHIFT:
-                                if (!buffer[event.keyCode] && scope.shift) {
-                                    buffer[event.keyCode] = true;
-                                }
+                            case keys.TAB:
+                                action(event.keyCode, scope.tab);
                                 break;
 
                             case keys.ENTER:
@@ -157,14 +152,74 @@
                                 }
                                 break;
 
-                            case keys.ESCAPE:
-                                if (!buffer[event.keyCode] && scope.escape) {
+                            case keys.SHIFT:
+                                if (!buffer[event.keyCode]) {
                                     buffer[event.keyCode] = true;
-                                    scope.$apply(function () {
-                                        scope.$eval(scope.escape);
-                                    });
-                                    event.preventDefault();
                                 }
+                                break;
+
+                            case keys.CTRL:
+                                if (!buffer[event.keyCode]) {
+                                    buffer[event.keyCode] = true;
+                                }
+                                break;
+
+                            case keys.ALT:
+                                if (!buffer[event.keyCode]) {
+                                    buffer[event.keyCode] = true;
+                                }
+                                break;
+
+                            case keys.ESCAPE:
+                                action(event.keyCode, scope.escape);
+                                break;                            
+                            
+                            case keys.F1:
+                                action(event.keyCode, scope.f1);
+                                break;
+
+                            case keys.F2:
+                                action(event.keyCode, scope.f2);
+                                break;
+
+                            case keys.F3:
+                                action(event.keyCode, scope.f3);
+                                break;
+
+                            case keys.F4:
+                                action(event.keyCode, scope.f4);
+                                break;
+
+                            case keys.F5:
+                                action(event.keyCode, scope.f5);
+                                break;
+
+                            case keys.F6:
+                                action(event.keyCode, scope.f6);
+                                break;
+
+                            case keys.F7:
+                                action(event.keyCode, scope.f7);
+                                break;
+
+                            case keys.F8:
+                                action(event.keyCode, scope.f8);
+                                break;
+
+                            case keys.F9:
+                                action(event.keyCode, scope.f9);
+                                break;
+
+                            case keys.F10:
+                                action(event.keyCode, scope.f10);
+                                break;
+
+                            case keys.F11:
+                                action(event.keyCode, scope.f11);
+                                break;
+
+                            case keys.F12:
+                                action(event.keyCode, scope.f12);
                                 break;
                         }
                     }
@@ -180,8 +235,83 @@
             return {
                 restrict: 'AE',
                 scope: {
-                    enter: '&',
+                    preventDefault: '=',
+
                     shiftEnter: '&',
+
+                    backspace: '&',
+                    tab: '&',
+                    enter: '&',
+                    shift: '&',
+                    ctrl: '&',
+                    alt: '&',
+                    pause_break: '&',
+                    caps_lock: '&',
+                    escape: '&',
+                    page_up: '&',
+                    page_down: '&',
+                    end: '&',
+                    home: '&',
+                    left_arrow: '&',
+                    up_arrow: '&',
+                    right_arrow: '&',
+                    down_arrow: '&',
+                    insert: '&',
+                    del: '&',
+                    0: '&',
+                    1: '&',
+                    2: '&',
+                    3: '&',
+                    4: '&',
+                    5: '&',
+                    6: '&',
+                    7: '&',
+                    8: '&',
+                    9: '&',
+                    a: '&',
+                    b: '&',
+                    c: '&',
+                    d: '&',
+                    e: '&',
+                    f: '&',
+                    g: '&',
+                    h: '&',
+                    i: '&',
+                    j: '&',
+                    k: '&',
+                    l: '&',
+                    m: '&',
+                    n: '&',
+                    o: '&',
+                    p: '&',
+                    q: '&',
+                    r: '&',
+                    s: '&',
+                    t: '&',
+                    u: '&',
+                    v: '&',
+                    w: '&',
+                    x: '&',
+                    y: '&',
+                    z: '&',
+                    left_window_key: '&',
+                    right_window_key: '&',
+                    select_key: '&',
+                    numpad_0: '&',
+                    numpad_1: '&',
+                    numpad_2: '&',
+                    numpad_3: '&',
+                    numpad_4: '&',
+                    numpad_5: '&',
+                    numpad_6: '&',
+                    numpad_7: '&',
+                    numpad_8: '&',
+                    numpad_9: '&',
+                    multiply: '&',
+                    add: '&',
+                    subtract: '&',
+                    decimal_point: '&',
+                    divide: '&',
                     f1: '&',
                     f2: '&',
                     f3: '&',
@@ -194,7 +324,19 @@
                     f10: '&',
                     f11: '&',
                     f12: '&',
-                    escape: '&'
+                    num_lock: '&',
+                    scroll_lock: '&',
+                    semi_colon: '&',
+                    equal_sign: '&',
+                    comma: '&',
+                    dash: '&',
+                    period: '&',
+                    forward_slash: '&',
+                    grave_accent: '&',
+                    open_bracket: '&',
+                    back_slash: '&',
+                    close_bracket: '&',
+                    single_quote: '&'
                 },
                 link: link
             }
@@ -202,4 +344,3 @@
         }]);
 
 } ());
-    
