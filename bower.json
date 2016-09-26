@@ -1,6 +1,6 @@
 {
     "name": "egmfilho-keys-shortcuts",
-    "version": "0.1",
+    "version": "0.1.1",
     "description": "",
     "author": "https://github.com/egmfilho",
     "main": "./src/keys.js",
