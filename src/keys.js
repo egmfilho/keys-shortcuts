@@ -125,7 +125,7 @@
 								scope.$eval(callback);
 							});
 
-							if (scope.preventDefault) {
+							if (attrs.preventDefault) {
 								event.preventDefault();
 							}
 						}
