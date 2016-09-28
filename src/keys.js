@@ -117,8 +117,8 @@
 
 			function link(scope, element, attrs) {
 
-				function action(keyCode, callback, preventDefault) {
-					if (callback) {
+				function action(keyCode, attr, callback) {
+					if (attr) {
 						if (!buffer[keyCode]) {
 							buffer[keyCode] = true;
 							scope.$apply(function () {
@@ -137,15 +137,15 @@
 
 						switch (event.keyCode) {
 							case keys.BACKSPACE:
-								action(event.keyCode, scope.backspace);
+								action(event.keyCode, attrs.backspace, scope.backspace);
 								break;
 
 							case keys.TAB:
-								action(event.keyCode, scope.tab);
+								action(event.keyCode, attrs.tab, scope.tab);
 								break;
 
 							case keys.ENTER:
-								if (!buffer[event.keyCode] && (scope.enter || scope.shiftEnter)) {
+								if (!buffer[event.keyCode] && (attrs.enter || attrs.shiftEnter)) {
 									buffer[event.keyCode] = true;
 									scope.$apply(function () {
 										buffer[keys.SHIFT] ? scope.$eval(scope.shiftEnter) : scope.$eval(scope.enter);
@@ -173,55 +173,55 @@
 								break;
 
 							case keys.ESCAPE:
-								action(event.keyCode, scope.escape);
+								action(event.keyCode, attrs.escape, scope.escape);
 								break;
 
 							case keys.F1:
-								action(event.keyCode, scope.f1);
+								action(event.keyCode, attrs.f1, scope.f1);
 								break;
 
 							case keys.F2:
-								action(event.keyCode, scope.f2);
+								action(event.keyCode, attrs.f2, scope.f2);
 								break;
 
 							case keys.F3:
-								action(event.keyCode, scope.f3);
+								action(event.keyCode, attrs.f3, scope.f3);
 								break;
 
 							case keys.F4:
-								action(event.keyCode, scope.f4);
+								action(event.keyCode, attrs.f4, scope.f4);
 								break;
 
 							case keys.F5:
-								action(event.keyCode, scope.f5);
+								action(event.keyCode, attrs.f5, scope.f5);
 								break;
 
 							case keys.F6:
-								action(event.keyCode, scope.f6);
+								action(event.keyCode, attrs.f6, scope.f6);
 								break;
 
 							case keys.F7:
-								action(event.keyCode, scope.f7);
+								action(event.keyCode, attrs.f7, scope.f7);
 								break;
 
 							case keys.F8:
-								action(event.keyCode, scope.f8);
+								action(event.keyCode, attrs.f8, scope.f8);
 								break;
 
 							case keys.F9:
-								action(event.keyCode, scope.f9);
+								action(event.keyCode, attrs.f9, scope.f9);
 								break;
 
 							case keys.F10:
-								action(event.keyCode, scope.f10);
+								action(event.keyCode, attrs.f10, scope.f10);
 								break;
 
 							case keys.F11:
-								action(event.keyCode, scope.f11);
+								action(event.keyCode, attrs.f11, scope.f11);
 								break;
 
 							case keys.F12:
-								action(event.keyCode, scope.f12);
+								action(event.keyCode, attrs.f12, scope.f12);
 								break;
 						}
 					}
