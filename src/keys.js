@@ -118,14 +118,16 @@
 			function link(scope, element, attrs) {
 
 				function action(keyCode, callback, preventDefault) {
-					if (!buffer[keyCode] && callback) {
-						buffer[keyCode] = true;
-						scope.$apply(function () {
-							scope.$eval(callback);
-						});
+					if (callback) {
+						if (!buffer[keyCode]) {
+							buffer[keyCode] = true;
+							scope.$apply(function () {
+								scope.$eval(callback);
+							});
 
-						if (scope.preventDefault && callback) {
-							event.preventDefault();
+							if (scope.preventDefault) {
+								event.preventDefault();
+							}
 						}
 					}
 				}
