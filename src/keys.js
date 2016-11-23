@@ -106,11 +106,20 @@
 
 			var map = {};
 
-			angular.forEach(keys, function (value, key) {
-				map[value] = false;
-			});
+      angular.forEach(keys, function (value, key) {
+        map[value] = false;
+      });
 
-			return map;
+			function clear() {
+        angular.forEach(map, function (value, key) {
+          map[key] = false;
+        });
+      }
+
+			return {
+			  map: map,
+        clear: clear
+      };
 
 		}])
 		.directive('keysShortcuts', ['KEY_CODES', 'KeyBuffer', function (keys, buffer) {
@@ -119,8 +128,8 @@
 
 				function action(keyCode, attr, callback) {
 					if (attr) {
-						if (!buffer[keyCode]) {
-							buffer[keyCode] = true;
+						if (!buffer.map[keyCode]) {
+							buffer.map[keyCode] = true;
 							scope.$apply(function () {
 								scope.$eval(callback);
 							});
@@ -133,7 +142,7 @@
 				}
 
 				element.bind('keydown', function (event) {
-					if (event.keyCode in buffer) {
+					if (event.keyCode in buffer.map) {
 
 						switch (event.keyCode) {
 							case keys.BACKSPACE:
@@ -145,30 +154,30 @@
 								break;
 
 							case keys.ENTER:
-								if (!buffer[event.keyCode] && (attrs.enter || attrs.shiftEnter)) {
-									buffer[event.keyCode] = true;
+								if (!buffer.map[event.keyCode] && (attrs.enter || attrs.shiftEnter)) {
+									buffer.map[event.keyCode] = true;
 									scope.$apply(function () {
-										buffer[keys.SHIFT] ? scope.$eval(scope.shiftEnter) : scope.$eval(scope.enter);
+										buffer.map[keys.SHIFT] ? scope.$eval(scope.shiftEnter) : scope.$eval(scope.enter);
 									});
 									event.preventDefault();
 								}
 								break;
 
 							case keys.SHIFT:
-								if (!buffer[event.keyCode]) {
-									buffer[event.keyCode] = true;
+								if (!buffer.map[event.keyCode]) {
+									buffer.map[event.keyCode] = true;
 								}
 								break;
 
 							case keys.CTRL:
-								if (!buffer[event.keyCode]) {
-									buffer[event.keyCode] = true;
+								if (!buffer.map[event.keyCode]) {
+									buffer.map[event.keyCode] = true;
 								}
 								break;
 
 							case keys.ALT:
-								if (!buffer[event.keyCode]) {
-									buffer[event.keyCode] = true;
+								if (!buffer.map[event.keyCode]) {
+									buffer.map[event.keyCode] = true;
 								}
 								break;
 
@@ -228,10 +237,14 @@
 				});
 
 				element.bind('keyup', function (event) {
-					if (event.keyCode in buffer) {
-						buffer[event.keyCode] = false;
+					if (event.keyCode in buffer.map) {
+						buffer.map[event.keyCode] = false;
 					}
 				});
+
+        element.bind('blur', function() {
+          buffer.clear();
+        });
 			}
 
 			return {
