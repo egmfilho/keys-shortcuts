@@ -1,3 +1,10 @@
+/*
+* @Author: egmfilho
+* @Date:   2017-05-29 13:39:44
+* @Last Modified by:   egmfilho
+* @Last Modified time: 2017-05-29 17:01:45
+*/
+
 (function () {
 	'use strict';
 
@@ -106,38 +113,53 @@
 
 			var map = {};
 
-      angular.forEach(keys, function (value, key) {
-        map[value] = false;
-      });
+			angular.forEach(keys, function (value, key) {
+				map[value] = false;
+			});
 
 			function clear() {
-        angular.forEach(map, function (value, key) {
-          map[key] = false;
-        });
-      }
+				angular.forEach(map, function (value, key) {
+					map[key] = false;
+				});
+			}
 
 			return {
-			  map: map,
-        clear: clear
-      };
+				map: map,
+				clear: clear
+			};
 
 		}])
 		.directive('keysShortcuts', ['KEY_CODES', 'KeyBuffer', function (keys, buffer) {
 
 			function link(scope, element, attrs) {
 
-				function action(keyCode, attr, callback) {
-					if (attr) {
-						if (!buffer.map[keyCode]) {
-							buffer.map[keyCode] = true;
-							scope.$apply(function () {
-								scope.$eval(callback);
-							});
+				function capitalize(string) {
+					return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+				}
 
-							if (attrs.preventDefault) {
-								event.preventDefault();
-							}
+				function action(event, name) {
+					if (!buffer.map[event.keyCode]) {
+						buffer.map[event.keyCode] = true;
+
+						if (buffer.map[keys.SHIFT] && attrs['shift' + capitalize(name)]) {
+							scope.$apply(function () {
+								scope.$eval(attrs['shift' + capitalize(name)], { $event: event });
+							});
+						} else if (buffer.map[keys.CTRL] && attrs['ctrl' + capitalize(name)]) {
+							scope.$apply(function () {
+								scope.$eval(attrs['ctrl' + capitalize(name)], { $event: event });
+							});
+						} else if (buffer.map[keys.ALT] && attrs['alt' + capitalize(name)]) {
+							scope.$apply(function () {
+								scope.$eval(attrs['alt' + capitalize(name)], { $event: event });
+							});
+						} else {
+							scope.$apply(function () {
+								scope.$eval(attrs[name.toLowerCase()], { $event: event });
+							});
 						}
+
+						if (attrs.preventDefault) event.preventDefault();
 					}
 				}
 
@@ -145,24 +167,6 @@
 					if (event.keyCode in buffer.map) {
 
 						switch (event.keyCode) {
-							case keys.BACKSPACE:
-								action(event.keyCode, attrs.backspace, scope.backspace);
-								break;
-
-							case keys.TAB:
-								action(event.keyCode, attrs.tab, scope.tab);
-								break;
-
-							case keys.ENTER:
-								if (!buffer.map[event.keyCode] && (attrs.enter || attrs.shiftEnter)) {
-									buffer.map[event.keyCode] = true;
-									scope.$apply(function () {
-										buffer.map[keys.SHIFT] ? scope.$eval(scope.shiftEnter) : scope.$eval(scope.enter);
-									});
-									event.preventDefault();
-								}
-								break;
-
 							case keys.SHIFT:
 								if (!buffer.map[event.keyCode]) {
 									buffer.map[event.keyCode] = true;
@@ -181,56 +185,68 @@
 								}
 								break;
 
+							case keys.ENTER:
+								action(event, 'enter');
+								break;
+
+							case keys.BACKSPACE:
+								action(event, 'backspace');
+								break;
+
+							case keys.TAB:
+								action(event, 'tab');
+								break;
+
 							case keys.ESCAPE:
-								action(event.keyCode, attrs.escape, scope.escape);
+								action(event, 'escape');
 								break;
 
 							case keys.F1:
-								action(event.keyCode, attrs.f1, scope.f1);
+								action(event, 'f1');
 								break;
 
 							case keys.F2:
-								action(event.keyCode, attrs.f2, scope.f2);
+								action(event, 'f2');
 								break;
 
 							case keys.F3:
-								action(event.keyCode, attrs.f3, scope.f3);
+								action(event, 'f3');
 								break;
 
 							case keys.F4:
-								action(event.keyCode, attrs.f4, scope.f4);
+								action(event, 'f4');
 								break;
 
 							case keys.F5:
-								action(event.keyCode, attrs.f5, scope.f5);
+								action(event, 'f5');
 								break;
 
 							case keys.F6:
-								action(event.keyCode, attrs.f6, scope.f6);
+								action(event, 'f6');
 								break;
 
 							case keys.F7:
-								action(event.keyCode, attrs.f7, scope.f7);
+								action(event, 'f7');
 								break;
 
 							case keys.F8:
-								action(event.keyCode, attrs.f8, scope.f8);
+								action(event, 'f8');
 								break;
 
 							case keys.F9:
-								action(event.keyCode, attrs.f9, scope.f9);
+								action(event, 'f9');
 								break;
 
 							case keys.F10:
-								action(event.keyCode, attrs.f10, scope.f10);
+								action(event, 'f10');
 								break;
 
 							case keys.F11:
-								action(event.keyCode, attrs.f11, scope.f11);
+								action(event, 'f11');
 								break;
 
 							case keys.F12:
-								action(event.keyCode, attrs.f12, scope.f12);
+								action(event, 'f12');
 								break;
 						}
 					}
@@ -242,117 +258,13 @@
 					}
 				});
 
-        element.bind('blur', function() {
-          buffer.clear();
-        });
+				element.bind('blur', function() {
+					buffer.clear();
+				});
 			}
 
 			return {
 				restrict: 'AE',
-				scope: {
-					preventDefault: '=',
-
-					shiftEnter: '&',
-
-					backspace: '&',
-					tab: '&',
-					enter: '&',
-					shift: '&',
-					ctrl: '&',
-					alt: '&',
-					pause_break: '&',
-					caps_lock: '&',
-					escape: '&',
-					page_up: '&',
-					page_down: '&',
-					end: '&',
-					home: '&',
-					left_arrow: '&',
-					up_arrow: '&',
-					right_arrow: '&',
-					down_arrow: '&',
-					insert: '&',
-					del: '&',
-					0: '&',
-					1: '&',
-					2: '&',
-					3: '&',
-					4: '&',
-					5: '&',
-					6: '&',
-					7: '&',
-					8: '&',
-					9: '&',
-					a: '&',
-					b: '&',
-					c: '&',
-					d: '&',
-					e: '&',
-					f: '&',
-					g: '&',
-					h: '&',
-					i: '&',
-					j: '&',
-					k: '&',
-					l: '&',
-					m: '&',
-					n: '&',
-					o: '&',
-					p: '&',
-					q: '&',
-					r: '&',
-					s: '&',
-					t: '&',
-					u: '&',
-					v: '&',
-					w: '&',
-					x: '&',
-					y: '&',
-					z: '&',
-					left_window_key: '&',
-					right_window_key: '&',
-					select_key: '&',
-					numpad_0: '&',
-					numpad_1: '&',
-					numpad_2: '&',
-					numpad_3: '&',
-					numpad_4: '&',
-					numpad_5: '&',
-					numpad_6: '&',
-					numpad_7: '&',
-					numpad_8: '&',
-					numpad_9: '&',
-					multiply: '&',
-					add: '&',
-					subtract: '&',
-					decimal_point: '&',
-					divide: '&',
-					f1: '&',
-					f2: '&',
-					f3: '&',
-					f4: '&',
-					f5: '&',
-					f6: '&',
-					f7: '&',
-					f8: '&',
-					f9: '&',
-					f10: '&',
-					f11: '&',
-					f12: '&',
-					num_lock: '&',
-					scroll_lock: '&',
-					semi_colon: '&',
-					equal_sign: '&',
-					comma: '&',
-					dash: '&',
-					period: '&',
-					forward_slash: '&',
-					grave_accent: '&',
-					open_bracket: '&',
-					back_slash: '&',
-					close_bracket: '&',
-					single_quote: '&'
-				},
 				link: link
 			}
 
