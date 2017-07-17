@@ -2,7 +2,7 @@
 * @Author: egmfilho
 * @Date:   2017-05-29 13:39:44
 * @Last Modified by:   egmfilho
-* @Last Modified time: 2017-05-29 17:01:45
+* @Last Modified time: 2017-07-17 17:42:00
 */
 
 (function () {
@@ -10,111 +10,111 @@
 
 	angular.module('egmfilho.keys', [])
 		.constant('KEY_CODES', {
-			BACKSPACE: 8,
-			TAB: 9,
-			ENTER: 13,
-			SHIFT: 16,
-			CTRL: 17,
-			ALT: 18,
-			PAUSE_BREAK: 19,
-			CAPS_LOCK: 20,
-			ESCAPE: 27,
-			PAGE_UP: 33,
-			PAGE_DOWN: 34,
-			END: 35,
-			HOME: 36,
-			LEFT_ARROW: 37,
-			UP_ARROW: 38,
-			RIGHT_ARROW: 39,
-			DOWN_ARROW: 40,
-			INSERT: 45,
-			DEL: 46,
-			0: 48,
-			1: 49,
-			2: 50,
-			3: 51,
-			4: 52,
-			5: 53,
-			6: 54,
-			7: 55,
-			8: 56,
-			9: 57,
-			A: 65,
-			B: 66,
-			C: 67,
-			D: 68,
-			E: 69,
-			F: 70,
-			G: 71,
-			H: 72,
-			I: 73,
-			J: 74,
-			K: 75,
-			L: 76,
-			M: 77,
-			N: 78,
-			O: 79,
-			P: 80,
-			Q: 81,
-			R: 82,
-			S: 83,
-			T: 84,
-			U: 85,
-			V: 86,
-			W: 87,
-			X: 88,
-			Y: 89,
-			Z: 90,
-			LEFT_WINDOW_KEY: 91,
-			RIGHT_WINDOW_KEY: 92,
-			SELECT_KEY: 93,
-			NUMPAD_0: 96,
-			NUMPAD_1: 97,
-			NUMPAD_2: 98,
-			NUMPAD_3: 99,
-			NUMPAD_4: 100,
-			NUMPAD_5: 101,
-			NUMPAD_6: 102,
-			NUMPAD_7: 103,
-			NUMPAD_8: 104,
-			NUMPAD_9: 105,
-			MULTIPLY: 106,
-			ADD: 107,
-			SUBTRACT: 109,
-			DECIMAL_POINT: 110,
-			DIVIDE: 111,
-			F1: 112,
-			F2: 113,
-			F3: 114,
-			F4: 115,
-			F5: 116,
-			F6: 117,
-			F7: 118,
-			F8: 119,
-			F9: 120,
-			F10: 121,
-			F11: 122,
-			F12: 123,
-			NUM_LOCK: 144,
-			SCROLL_LOCK: 145,
-			SEMI_COLON: 186,
-			EQUAL_SIGN: 187,
-			COMMA: 188,
-			DASH: 189,
-			PERIOD: 190,
-			FORWARD_SLASH: 191,
-			GRAVE_ACCENT: 192,
-			OPEN_BRACKET: 219,
-			BACK_SLASH: 220,
-			CLOSE_BRACKET: 221,
-			SINGLE_QUOTE: 222
+			BACKSPACE: { code: 8, name: 'backspace' },
+			TAB: { code: 9, name: 'tab' },
+			ENTER: { code: 13, name: 'enter' },
+			SHIFT: { code: 16, name: 'shift' },
+			CTRL: { code: 17, name: 'ctrl' },
+			ALT: { code: 18, name: 'alt' },
+			PAUSE_BREAK: { code: 19, name: 'pauseBreak' },
+			CAPS_LOCK: { code: 20, name: 'capsLock' },
+			ESCAPE: { code: 27, name: 'escape' },
+			PAGE_UP: { code: 33, name: 'pageUp' },
+			PAGE_DOWN: { code: 34, name: 'pageDown' },
+			END: { code: 35, name: 'end' },
+			HOME: { code: 36, name: 'home' },
+			LEFT_ARROW: { code: 37, name: 'leftArrow' },
+			UP_ARROW: { code: 38, name: 'upArrow' },
+			RIGHT_ARROW: { code: 39, name: 'rightArrow' },
+			DOWN_ARROW: { code: 40, name: 'downArrow' },
+			INSERT: { code: 45, name: 'insert' },
+			DEL: { code: 46, name: 'del' },
+			0: { code: 48, name: '0' },
+			1: { code: 49, name: '1' },
+			2: { code: 50, name: '2' },
+			3: { code: 51, name: '3' },
+			4: { code: 52, name: '4' },
+			5: { code: 53, name: '5' },
+			6: { code: 54, name: '6' },
+			7: { code: 55, name: '7' },
+			8: { code: 56, name: '8' },
+			9: { code: 57, name: '9' },
+			A: { code: 65, name: 'a' },
+			B: { code: 66, name: 'b' },
+			C: { code: 67, name: 'c' },
+			D: { code: 68, name: 'd' },
+			E: { code: 69, name: 'e' },
+			F: { code: 70, name: 'f' },
+			G: { code: 71, name: 'g' },
+			H: { code: 72, name: 'h' },
+			I: { code: 73, name: 'i' },
+			J: { code: 74, name: 'j' },
+			K: { code: 75, name: 'k' },
+			L: { code: 76, name: 'l' },
+			M: { code: 77, name: 'm' },
+			N: { code: 78, name: 'n' },
+			O: { code: 79, name: 'o' },
+			P: { code: 80, name: 'p' },
+			Q: { code: 81, name: 'q' },
+			R: { code: 82, name: 'r' },
+			S: { code: 83, name: 's' },
+			T: { code: 84, name: 't' },
+			U: { code: 85, name: 'u' },
+			V: { code: 86, name: 'v' },
+			W: { code: 87, name: 'w' },
+			X: { code: 88, name: 'x' },
+			Y: { code: 89, name: 'y' },
+			Z: { code: 90, name: 'z' },
+			LEFT_WINDOW_KEY: { code: 91, name: 'leftWindowKey' },
+			RIGHT_WINDOW_KEY: { code: 92, name: 'rightWindowKey' },
+			SELECT_KEY: { code: 93, name: 'selectKey' },
+			NUMPAD_0: { code: 96, name: 'numpad0' },
+			NUMPAD_1: { code: 97, name: 'numpad1' },
+			NUMPAD_2: { code: 98, name: 'numpad2' },
+			NUMPAD_3: { code: 99, name: 'numpad3' },
+			NUMPAD_4: { code: 100, name: 'numpad4' },
+			NUMPAD_5: { code: 101, name: 'numpad5' },
+			NUMPAD_6: { code: 102, name: 'numpad6' },
+			NUMPAD_7: { code: 103, name: 'numpad7' },
+			NUMPAD_8: { code: 104, name: 'numpad8' },
+			NUMPAD_9: { code: 105, name: 'numpad9' },
+			MULTIPLY: { code: 106, name: 'multiply' },
+			ADD: { code: 107, name: 'add' },
+			SUBTRACT: { code: 109, name: 'subtract' },
+			DECIMAL_POINT: { code: 110, name: 'decimalPoint' },
+			DIVIDE: { code: 111, name: 'divide' },
+			F1: { code: 112, name: 'f1' },
+			F2: { code: 113, name: 'f2' },
+			F3: { code: 114, name: 'f3' },
+			F4: { code: 115, name: 'f4' },
+			F5: { code: 116, name: 'f5' },
+			F6: { code: 117, name: 'f6' },
+			F7: { code: 118, name: 'f7' },
+			F8: { code: 119, name: 'f8' },
+			F9: { code: 120, name: 'f9' },
+			F10: { code: 121, name: 'f10' },
+			F11: { code: 122, name: 'f11' },
+			F12: { code: 123, name: 'f12' },
+			NUM_LOCK: { code: 144, name: 'numLock' },
+			SCROLL_LOCK: { code: 145, name: 'scrollLock' },
+			SEMI_COLON: { code: 186, name: 'semiColon' },
+			EQUAL_SIGN: { code: 187, name: 'equalSign' },
+			COMMA: { code: 188, name: 'comma' },
+			DASH: { code: 189, name: 'dash' },
+			PERIOD: { code: 190, name: 'period' },
+			FORWARD_SLASH: { code: 191, name: 'forwardSlash' },
+			GRAVE_ACCENT: { code: 192, name: 'graveAccent' },
+			OPEN_BRACKET: { code: 219, name: 'openBracket' },
+			BACK_SLASH: { code: 220, name: 'backSlash' },
+			CLOSE_BRACKET: { code: 221, name: 'closeBracket' },
+			SINGLE_QUOTE: { code: 222, name: 'singleQuote' }
 		})
 		.factory('KeyBuffer', ['KEY_CODES', function (keys) {
 
 			var map = {};
 
 			angular.forEach(keys, function (value, key) {
-				map[value] = false;
+				map[value.code] = false;
 			});
 
 			function clear() {
@@ -137,19 +137,25 @@
 					return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 				}
 
+				function getKeyByCode(code) {
+					return Object.values(keys).find(function(k) {
+						return k.code == code;
+					});
+				}
+
 				function action(event, name) {
 					if (!buffer.map[event.keyCode]) {
 						buffer.map[event.keyCode] = true;
 
-						if (buffer.map[keys.SHIFT] && attrs['shift' + capitalize(name)]) {
+						if (buffer.map[keys.SHIFT.code] && attrs['shift' + capitalize(name)]) {
 							scope.$apply(function () {
 								scope.$eval(attrs['shift' + capitalize(name)], { $event: event });
 							});
-						} else if (buffer.map[keys.CTRL] && attrs['ctrl' + capitalize(name)]) {
+						} else if (buffer.map[keys.CTRL.code] && attrs['ctrl' + capitalize(name)]) {
 							scope.$apply(function () {
 								scope.$eval(attrs['ctrl' + capitalize(name)], { $event: event });
 							});
-						} else if (buffer.map[keys.ALT] && attrs['alt' + capitalize(name)]) {
+						} else if (buffer.map[keys.ALT.code] && attrs['alt' + capitalize(name)]) {
 							scope.$apply(function () {
 								scope.$eval(attrs['alt' + capitalize(name)], { $event: event });
 							});
@@ -167,86 +173,30 @@
 					if (event.keyCode in buffer.map) {
 
 						switch (event.keyCode) {
-							case keys.SHIFT:
+							case keys.SHIFT.code:
 								if (!buffer.map[event.keyCode]) {
 									buffer.map[event.keyCode] = true;
 								}
 								break;
 
-							case keys.CTRL:
+							case keys.CTRL.code:
 								if (!buffer.map[event.keyCode]) {
 									buffer.map[event.keyCode] = true;
 								}
 								break;
 
-							case keys.ALT:
+							case keys.ALT.code:
 								if (!buffer.map[event.keyCode]) {
 									buffer.map[event.keyCode] = true;
 								}
 								break;
 
-							case keys.ENTER:
-								action(event, 'enter');
-								break;
+							default:
+								var keyName = getKeyByCode(event.keyCode).name;
 
-							case keys.BACKSPACE:
-								action(event, 'backspace');
-								break;
-
-							case keys.TAB:
-								action(event, 'tab');
-								break;
-
-							case keys.ESCAPE:
-								action(event, 'escape');
-								break;
-
-							case keys.F1:
-								action(event, 'f1');
-								break;
-
-							case keys.F2:
-								action(event, 'f2');
-								break;
-
-							case keys.F3:
-								action(event, 'f3');
-								break;
-
-							case keys.F4:
-								action(event, 'f4');
-								break;
-
-							case keys.F5:
-								action(event, 'f5');
-								break;
-
-							case keys.F6:
-								action(event, 'f6');
-								break;
-
-							case keys.F7:
-								action(event, 'f7');
-								break;
-
-							case keys.F8:
-								action(event, 'f8');
-								break;
-
-							case keys.F9:
-								action(event, 'f9');
-								break;
-
-							case keys.F10:
-								action(event, 'f10');
-								break;
-
-							case keys.F11:
-								action(event, 'f11');
-								break;
-
-							case keys.F12:
-								action(event, 'f12');
+								if (attrs[keyName] || attrs['shift' + capitalize(keyName)] || attrs['ctrl' + capitalize(keyName)] || attrs['alt' + capitalize(keyName)]) {
+									action(event, keyName);
+								}
 								break;
 						}
 					}
